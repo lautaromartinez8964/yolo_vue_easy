@@ -1,0 +1,109 @@
+# Root .gitignore for FastAPI + Vue monorepo
+# Project: services/frontend (Vue) + services/backend (FastAPI)
+
+# -----------------------------
+# OS-specific files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Editor / IDE
+# -----------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.orig
+
+# -----------------------------
+# Environment / Secrets
+# -----------------------------
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+
+# -----------------------------
+# Logs
+# -----------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -----------------------------
+# Node / Vue (frontend)
+# -----------------------------
+node_modules/
+dist/
+dist-ssr/
+.eslintcache
+.cache/
+coverage/
+coverage-*
+*.tsbuildinfo
+# Common tool caches
+.vite/
+.nuxt/
+.sass-cache/
+.parcel-cache/
+
+# -----------------------------
+# Python (backend)
+# -----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+.venv*/
+.python-version
+# Packaging / build artifacts
+.build/
+build/
+dist/
+Develop-eggs/
+develop-eggs/
+.eggs/
+*.egg-info/
+*.egg
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+pip-wheel-metadata/
+pip-log.txt
+pip-delete-this-directory.txt
+# Test / type-check / linters
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.dmypy.json
+
+# -----------------------------
+# Miscellaneous
+# -----------------------------
+.ipynb_checkpoints/
+.nyc_output/
+.cache/pip/
+# Docker (optional local overrides)
+docker-compose.override.yml
