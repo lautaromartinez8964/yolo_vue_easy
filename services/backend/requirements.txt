@@ -1,2 +1,7 @@
 fastapi==0.88.0
 uvicorn==0.20.0
+aerich >= 0.7.0
+asyncpg
+passlib[bcrypt]==1.7.4
+tortoise-orm==0.19.2
+uvicorn==0.20.0
