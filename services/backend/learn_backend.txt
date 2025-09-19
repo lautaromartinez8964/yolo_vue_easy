@@ -1,0 +1,33 @@
+9.15 后端完成:
+
+I database文件夹：与Postgre数据库相关
+  config.py: 数据库配置文件
+  models.py :数据库主文件，定义了User和notes模型的各个字段与字段属性，如主键，外键等
+  register.py：连接后端程序与数据库
+
+II schemas文件夹：各种请求体与响应模型，包括输入/输出/更新的User与Notes的模型
+   notes.py:包括notes的创建模型，输出模型和更新模型
+   users.py:包括user的创建模型，返回模型（数据库外）和查询模型（数据库内）
+
+III crud文件夹：增删查改的基础操作函数，每个函数都会返回schemas定义的适用于不同请求的模型，如果出错会抛HTTP错误代码
+    users.py：增加新用户/删除用户
+    notes.py: 获取单个/所有笔记条目，在当前用户下增加/更新/删除条目
+
+IV  auth文件夹：承担用户密码校验的功能
+    jwthandler.py 里面的get_currentr_user函数：充当了受保护路由的“守门人”。任何需要用户登录才能访问的 API 端点都会依赖于这个函数。
+    它的核心职责是：从客户端的请求中提取 JWT，验证其有效性，解码它以识别用户，并从数据库中检索该用户的完整信息。如果任何一步失败，它就会拒绝访问
+
+V   test文件夹：利用pytest库测试后端接口，采用SQLite轻量数据库。模拟数据库中内容，进行操作并返回正确与否的断言
+    coftest.py:定义可重用的 pytest fixtures，为整个测试套件提供了一个自动化的内存数据库环境以及用于创建用户和笔记测试数据的工厂函数。
+               包括定义SQLite的数据库内容（user和note），初始化数据库表，将测试连接到轻量数据库中
+    test_user/notes_crud.py:测试各个crud函数，采用断言的形式,如果测试不通过pytest报错
+
+    今日学到Finally, let's update the CRUD helpers so that they use the Status pydantic model:
+
+9.16
+
+I schemas/token.py:定义响应结构（明确声明了函数成功时的返回数据结构）
+
+II routes文件夹:路由，集中管理所有API路由（接口）的定义。它负责将不同的HTTP请求（如GET、POST、PUT、DELETE）映射到对应的处理函数（通常是CRUD操作），并组织这些接口的分组（如用户、笔记等）。这样可以让项目结构清晰，方便维护和扩展。
+   users.py: 包括了注册路由（利用创建用户函数），登录路由（接收OAuth2形式的请求体，验证用户账号和密码，并记住cookie),获取用户路由和删除路由
+   notes.py: 包括了获取所有/单个笔记路由，创建新笔记路由，更新笔记路由，删除笔记路由，每个路径操作函数均须要注入get_current_user的依赖

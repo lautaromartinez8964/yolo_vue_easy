@@ -6,7 +6,7 @@ from src.database.models import Users
 # 我们将使用它来创建和检索数据库记录。它采用Users模型和name。您也可以exclude特定列。
 # 可以当作fastapi里面的请求体模型（用户传入的）和响应模型（返回给用户的）
 # 用于创建新用户
-UserInScheme = pydantic_model_creator(Users, name="UserIn", exclude_readonly=True)
+UserInSchema = pydantic_model_creator(Users, name="UserIn", exclude_readonly=True)
 
 # 用于检索在app之外使用的用户信息，并返回给最终用户
 UserOutSchema = pydantic_model_creator(

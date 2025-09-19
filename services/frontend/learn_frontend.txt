@@ -1,0 +1,15 @@
+I Store文件夹：用于axios，前后端连接
+  module.user/notes/js；接收来自用户(Vue组件）的命令（dispatch),使用axios工具与fastapi后端沟通，拿到结果后命令mutations去更新前端状态state
+  index.js：创建并导出全局唯一的VuexStore实例
+II router/index.js:前端的中央交通枢纽，告诉Vue应用，当用户访问某个URL时，应该显示哪个页面(组件)
+   1.定义路由：创建一份清单，列出应用中所有的"地址"(URL路径), 以及每个地址对应的"目的地"(Vue组件
+   2.创建路由对象：创建一个实际的路由器对象，这个对象负责在用户浏览时进行导航
+   3.提供配置模式：决定URL的显示方式
+
+   # 和axios的store/index.js文件夹相比：
+     router是导航员，只负责URL与界面映射，只关心根据当前URL，应该把哪个组件展示给用户
+     store是大脑/指挥中心，是应用所有共享数据的唯一存放地，只关心当前数据状态是什么，处理与后端的沟通，异步操作，如何获取和更新数据
+
+II Components文件夹：各种页面
+   NavBar.vue:导航栏
+   DashboardView.vue:

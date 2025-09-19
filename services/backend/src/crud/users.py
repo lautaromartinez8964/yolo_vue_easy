@@ -7,7 +7,7 @@ from tortoise.exceptions import (
 
 from src.database.models import Users
 from src.schemas.users import UserOutSchema
-
+from src.schemas.token import Status
 # 这行代码使用 passlib 库创建了一个密码哈希上下文（CryptContext），用于安全地处理用户密码。
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -27,7 +27,7 @@ async def create_user(user) -> UserOutSchema:
 
 
 # 定义一个删除用户的函数：只允许当前用户删除自己
-async def delete_user(user_id, current_user): #user_id为待删除的主键，current_user为当前登陆用户
+async def delete_user(user_id, current_user) -> Status: #user_id为待删除的主键，current_user为当前登陆用户
     try:
         # 查询数据库中id=user_id的用户，直接转换为输出模型
         db_user = await UserOutSchema.from_queryset_single(Users.get(id=user_id))
@@ -41,6 +41,6 @@ async def delete_user(user_id, current_user): #user_id为待删除的主键，cu
         deleted_count = await Users.filter(id=user_id).delete()
         if not deleted_count:
             raise HTTPException(status_code=404, detail=f"User {user_id} not found")
-        return f"Deleted user {user_id}"
+        return Status(message=f"Deleted user {user_id}")
 
     raise HTTPException(status_code=403, detail="Not authorized to delete")
